@@ -20,7 +20,7 @@ public class DBManager {
     public DBManager(Context c) {
         context = c;
     }
-    public DBManager(){}
+   // public DBManager(){}
 
     // Before insert, update or delete any records the database has to be opened
     public DBManager open() throws SQLException {

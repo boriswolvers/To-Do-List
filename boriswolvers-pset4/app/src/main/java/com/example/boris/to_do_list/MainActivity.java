@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -53,20 +52,10 @@ public class MainActivity extends AppCompatActivity {
             editor.putString("intially", "intially");
             editor.commit();
         }
+
         // Set the listview
         setList();
-    }
 
-
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    public void onRestoreInstanceState(Bundle inState) {
-        super.onRestoreInstanceState(inState);
-
-        // setting the listview
-        setListView();
     }
 
     private void setList() {
@@ -81,9 +70,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Setting the to-do items to the listview
         listViewToDoItems.setAdapter(adapter);
-
-        // Setting the listview according the checked and unchecked boxes
-        setListView();
 
         // when a list item is LongClicked -> remove from listview and sql database
         listViewToDoItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -115,8 +101,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Setting the listview according the checked and unchecked boxes
-        setListView();
 
         // when a listview item is (short) onclicked -> check the item as task done
         listViewToDoItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -155,23 +139,23 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-        // Setting the listview according the checked and unchecked boxes
-        setListView();
     }
 
-    public void setListView(){
+    public void restore(View view){
 
+        // Find the ListView
         listViewToDoItems = (ListView) findViewById(R.id.listView);
 
         // Get sharedpreferences to decide which checkboxes are already checked (or unchecked)
         prefs = getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
 
+        // Get amount items in ListView
         int count = listViewToDoItems.getChildCount();
+
         for(int i= 0; i <count; i++){
 
             // Obtain the text(description) from an item in the listview
-            View viewItem = (View)listViewToDoItems.getItemAtPosition(i);
+            View viewItem = (View)listViewToDoItems.getChildAt(i);
             TextView textViewItem = (TextView)viewItem.findViewById(R.id.textviewListItem);
             String textStringItem = textViewItem.getText().toString();
 
@@ -193,8 +177,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
-
-        return;
     }
 
     public void addItemtoView(View view) {
@@ -204,6 +186,12 @@ public class MainActivity extends AppCompatActivity {
 
         // make sure user enters an item
         if (!(stringToDoItem.length() == 0)) {
+            prefs = getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = prefs.edit();
+
+            editor.putString(stringToDoItem, "UNCHECKED");
+            editor.commit();
+
             // Insert string in database
             dbManager.insert(stringToDoItem);
 
