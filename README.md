@@ -1,2 +1,6 @@
-# To-Do-List
-To-do list app.
+# boriswolvers-pset4
+## To-Do List
+With this app you can add items to a todo list.
+
+#### The UI of the app
+![alt text](https://github.com/boriswolvers/To-Do-List/blob/master/doc/todolistUI.png "UI of todolist")
