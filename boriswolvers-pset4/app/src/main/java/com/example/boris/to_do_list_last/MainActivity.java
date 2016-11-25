@@ -136,12 +136,6 @@ public class MainActivity extends AppCompatActivity {
 
         // make sure user enters an item
         if (!(stringToDoItem.length() == 0)) {
-            prefs = getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = prefs.edit();
-
-            editor.putString(stringToDoItem, "UNCHECKED");
-            editor.commit();
-
             // Add new item to the database with the right unchecked image and description
             dbManager.insert(imageIDs[0], stringToDoItem);
 
