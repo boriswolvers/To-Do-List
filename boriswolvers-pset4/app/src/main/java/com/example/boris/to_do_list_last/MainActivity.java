@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
             editor.putString(stringToDoItem, "UNCHECKED");
             editor.commit();
 
-            // Add it to the DB and re-draw the ListView
+            // Add new item to the database with the right unchecked image and description
             dbManager.insert(imageIDs[0], stringToDoItem);
 
             // Update cursor object
