@@ -4,7 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
     defaultConfig {
-        applicationId "com.example.boris.to_do_list"
+        applicationId "com.example.boris.to_do_list_last"
         minSdkVersion 15
         targetSdkVersion 25
         versionCode 1

@@ -1,4 +1,4 @@
-package com.example.boris.to_do_list;
+package com.example.boris.to_do_list_last;
 
 import org.junit.Test;
 
